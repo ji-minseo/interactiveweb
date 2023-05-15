@@ -38,20 +38,36 @@ const controls = new OrbitControls( camera, renderer.domElement );
 
 controls.update();
 
+const geometry = new THREE.CapsuleGeometry( 3, 30, 10, 20 ); 
+const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ); 
+const capsule = new THREE.Mesh( geometry, material ); 
+scene.add( capsule );
+renderer.render(scene, camera); // 랜더링
+capsule.rotation.x += 0.05
 
-loader.load("./assets/scene.gltf", function (gltf) {
-    scene.add(gltf.scene);
-    renderer.render(scene, camera); // 랜더링
-    gltf.scene.rotation.x += 0.05
+function animate() {
+  requestAnimationFrame(animate)
+  gltf.scene.rotation.y += 0.01
+  renderer.render(scene, camera); // 랜더링
+  controls.update();
 
-    function animate() {
-        requestAnimationFrame(animate)
-        gltf.scene.rotation.y += 0.01
-        renderer.render(scene, camera); // 랜더링
-        controls.update();
+}
+animate()
 
-    }
-    animate()
-  });
+
+// loader.load("./assets/scene.gltf", function (gltf) {
+//     scene.add(gltf.scene);
+//     renderer.render(scene, camera); // 랜더링
+//     gltf.scene.rotation.x += 0.05
+
+//     function animate() {
+//         requestAnimationFrame(animate)
+//         gltf.scene.rotation.y += 0.01
+//         renderer.render(scene, camera); // 랜더링
+//         controls.update();
+
+//     }
+//     animate()
+//   });
 
 
